@@ -46,9 +46,11 @@ async function day4(inputPath) {
     } else {
       const [, count, , from, , to] = line.split(" ");
 
-      for (let i = 0; i < count; i++) {
-        stacks[to - 1].push(stacks[from - 1].pop());
-      }
+      const slice = stacks[from - 1].slice(-count);
+
+      stacks[to - 1].push(...slice);
+
+      stacks[from - 1] = stacks[from - 1].slice(0, -count);
     }
   }
 
